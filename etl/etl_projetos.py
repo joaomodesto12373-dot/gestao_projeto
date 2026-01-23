@@ -14,3 +14,4 @@ df["status_atraso"] = df["data_fim_prevista"].apply(
 )
 
 print(df)
+
