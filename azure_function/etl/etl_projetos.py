@@ -5,7 +5,7 @@ from datetime import datetime
 # ==============================
 # 1. EXTRAÇÃO
 # ==============================
-df = pd.read_csv("../../data/projetos.csv")
+df = pd.read_csv("data/projetos.csv")
 
 # ==============================
 # 2. TRANSFORMAÇÃO
@@ -25,9 +25,10 @@ df["status_atraso"] = df["data_fim_prevista"].apply(
 # 3. CONEXÃO AZURE SQL (Azure AD)
 # ==============================
 connection_string = (
-    "Driver={ODBC Driver 17 for SQL Server};"
+    "Driver={ODBC Driver 18 for SQL Server};"
     "Server=tcp:db-projetos.database.windows.net,1433;"
     "Database=db_gestao_projetos;"
+    "Uid=modesto.pereira@ime.eb.br;"
     "Authentication=ActiveDirectoryInteractive;"
     "Encrypt=yes;"
     "TrustServerCertificate=no;"
