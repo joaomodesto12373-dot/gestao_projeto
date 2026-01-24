@@ -199,3 +199,4 @@ id_projeto,nome_projeto,gerente,data_inicio,data_fim_prevista,custo_orcado,custo
 198,Obra Alpha 198,Carlos,2024-05-05,2024-10-01,480000,428600,100
 199,Manutenção Gama 199,Ana,2024-06-08,2024-10-17,405000,476489,56
 200,Expansão Delta 200,Ricardo,2024-01-01,2024-03-27,345000,363280,89
+201,Expansão Delta 201,Ricardo,2024-01-01,2024-03-27,345000,303280,89
