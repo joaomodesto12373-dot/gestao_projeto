@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -133,3 +134,9 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 .python_packages
+=======
+.venv/
+__pycache__/
+.env
+*.log
+>>>>>>> branch1
