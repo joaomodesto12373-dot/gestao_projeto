@@ -2,22 +2,28 @@ name: Deploy Azure Function
 
 on:
   push:
-    branches: ["main"] 
+    branches: ["main"]
+  workflow_dispatch:
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'app-function' 
-  PACKAGE_PATH: 'azure_function'           
+  PACKAGE_PATH: 'azure_function'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - setup-python: '3.11'
-      
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: 'Install dependencies'
         run: |
-          pushd './${{ env:PACKAGE_PATH }}'
+          pushd './${{ env.PACKAGE_PATH }}'
           python -m pip install --upgrade pip
           pip install -r requirements.txt --target=".python_packages"
           popd
@@ -25,6 +31,6 @@ jobs:
       - name: 'Deploy to Azure'
         uses: Azure/functions-action@v1
         with:
-          app-name: ${{ env:AZURE_FUNCTIONAPP_NAME }}
-          package: ${{ env:PACKAGE_PATH }}
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          package: ${{ env.PACKAGE_PATH }}
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
