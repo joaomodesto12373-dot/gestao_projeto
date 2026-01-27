@@ -6,7 +6,7 @@ import os
 import smtplib
 from email.message import EmailMessage
 from azure.identity import DefaultAzureCredential
-from etl.etl_projetos import executar_etl  
+from etl_local_teste.etl_projetos import executar_etl  
 
 app = func.FunctionApp()
 
@@ -79,4 +79,4 @@ def timer_trigger(myTimer: func.TimerRequest) -> None:
     assunto = f"Status ETL/KPI - {hora_atual}"
     enviar_email(assunto, corpo_email)
 
-#versão 2.1
+#versão 3.5
