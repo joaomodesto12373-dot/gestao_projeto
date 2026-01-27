@@ -2,6 +2,7 @@ import logging
 import azure.functions as func
 import pyodbc
 import struct
+import os
 import smtplib
 from email.message import EmailMessage
 from azure.identity import DefaultAzureCredential
@@ -42,7 +43,9 @@ def atualizar_kpis():
 
     try:
         with pyodbc.connect(conn_str, attrs_before={1256: token_struct}) as conn:
-            with open('database/KPIs.sql', 'r', encoding='utf-8') as f:
+            BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+            sql_path = os.path.join(BASE_DIR, "database", "KPIs.sql")
+            with open(sql_path, "r", encoding="utf-8") as f:
                 sql_script = f.read()
             conn.execute(sql_script)
             conn.commit()

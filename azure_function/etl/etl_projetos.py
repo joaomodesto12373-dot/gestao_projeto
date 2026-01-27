@@ -1,18 +1,16 @@
 import pandas as pd
 import pyodbc
+import os
 import struct
 from datetime import datetime
 from azure.identity import InteractiveBrowserCredential
 
 def executar_etl():
-    # ==============================
-    # 1. EXTRAÇÃO
-    # ==============================
-    df = pd.read_csv("data/projetos.csv")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    csv_path = os.path.join(BASE_DIR, "data", "projetos.csv")
+    df = pd.read_csv(csv_path)
 
-    # ==============================
-    # 2. TRANSFORMAÇÃO
-    # ==============================
+
     hoje = pd.to_datetime(datetime.today().date())
 
     df["data_inicio"] = pd.to_datetime(df["data_inicio"])
@@ -24,9 +22,7 @@ def executar_etl():
         lambda data: "Atrasado" if data < hoje else "No Prazo"
     )
 
-    # ==============================
-    # 3. CONEXÃO AZURE SQL (Via Token/MFA)
-    # ==============================
+
     print("Solicitando autenticação via Browser...")
     credential = InteractiveBrowserCredential()
     token = credential.get_token("https://database.windows.net/.default")
@@ -53,9 +49,7 @@ def executar_etl():
     cursor.execute("TRUNCATE TABLE [dbo].[Projetos]")
     conn.commit()
 
-    # ==============================
-    # 4. CARGA
-    # ==============================
+
     # Verifique se as colunas 'desvio_custo' e 'status_atraso' existem na sua tabela SQL
     insert_query = """
     INSERT INTO Projetos (
