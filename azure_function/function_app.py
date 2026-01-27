@@ -79,3 +79,4 @@ def timer_trigger(myTimer: func.TimerRequest) -> None:
     assunto = f"Status ETL/KPI - {hora_atual}"
     enviar_email(assunto, corpo_email)
 
+#versão 2.0
