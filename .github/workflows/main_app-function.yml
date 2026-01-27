@@ -2,11 +2,11 @@ name: Deploy Azure Function
 
 on:
   push:
-    branches: ["main"] # Altere se sua branch principal tiver outro nome
+    branches: ["main"] 
 
 env:
-  AZURE_FUNCTIONAPP_NAME: 'NOME_DA_SUA_APP' # Coloque o nome da sua Function App aqui
-  PACKAGE_PATH: 'azure_function'           # Importante: aponta para a subpasta correta
+  AZURE_FUNCTIONAPP_NAME: 'app-function' 
+  PACKAGE_PATH: 'azure_function'           
 
 jobs:
   build-and-deploy:
