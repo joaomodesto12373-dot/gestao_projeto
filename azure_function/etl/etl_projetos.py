@@ -3,7 +3,7 @@ import pyodbc
 import os
 import struct
 from datetime import datetime
-from azure.identity import InteractiveBrowserCredential
+from azure.identity import DefaultAzureCredential
 
 def executar_etl():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +24,7 @@ def executar_etl():
 
 
     print("Solicitando autenticação via Browser...")
-    credential = InteractiveBrowserCredential()
+    credential = DefaultAzureCredential()
     token = credential.get_token("https://database.windows.net/.default")
 
     # Preparação do token binário para o Driver ODBC
