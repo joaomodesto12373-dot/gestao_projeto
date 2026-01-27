@@ -1,4 +1,4 @@
-CREATE VIEW dbo.vw_KPIs_Projetos AS
+CREATE OR ALTER VIEW dbo.vw_KPIs_Projetos AS
 SELECT 
     id_projeto,
     nome_projeto,
