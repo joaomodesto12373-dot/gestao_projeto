@@ -104,8 +104,4 @@ Para testes locais do ETL:
 python etl/etl_projetos.py
 ```
 
-**Nota:** A execução local do `etl_projetos.py` exigirá autenticação interativa via navegador para obter o Azure AD Token.
 
----
-
-**
