@@ -42,11 +42,10 @@ O fluxo de trabalho é o seguinte:
 ```
 .
 ├── README.md
-├── azure_function/
-│   ├── etl/
-│   ├── function_app.py  # Orquestração e Timer Trigger
-│   ├── host.json
-│   └── requirements.txt
+├
+│── function_app.py  # Orquestração e Timer Trigger
+│── host.json
+│
 ├── data/
 │   ├── gerador_csv.py   # Script para gerar dados de exemplo
 │   └── projetos.csv     # Fonte de dados de entrada
