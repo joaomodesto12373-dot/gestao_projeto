@@ -6,7 +6,7 @@ import os
 import smtplib
 from email.message import EmailMessage
 from azure.identity import DefaultAzureCredential
-from etl_local_teste.etl_projetos import executar_etl  
+from etl.etl_projetos import executar_etl  
 
 app = func.FunctionApp()
 
@@ -54,29 +54,31 @@ def atualizar_kpis():
         logging.error(f"Erro ao atualizar KPIs no SQL: {e}")
         return False
 
-@app.timer_trigger(schedule="0 0 12,20 * * *", arg_name="myTimer", run_on_startup=False)
+@app.schedule(
+    schedule="0 0 12,20 * * *",
+    arg_name="myTimer",
+    run_on_startup=False,
+    use_monitor=True
+)
 def timer_trigger(myTimer: func.TimerRequest) -> None:
     hora_atual = "12h" if myTimer.schedule_status and "12:00" in str(myTimer.schedule_status) else "20h"
     status_report = []
 
     logging.info(f"Iniciando processamento das {hora_atual}...")
 
-    # Passo 1: Rodar ETL
     try:
         executar_etl()
         status_report.append("ETL de Projetos: SUCESSO")
     except Exception as e:
         status_report.append(f"ETL de Projetos: FALHA ({e})")
 
-    # Passo 2: Rodar SQL de KPIs
     if atualizar_kpis():
         status_report.append("Atualização de KPIs SQL: SUCESSO")
     else:
         status_report.append("Atualização de KPIs SQL: FALHA")
 
-    # Passo 3: Enviar E-mail
     corpo_email = f"Relatório de Atualização - {hora_atual}\n\n" + "\n".join(status_report)
     assunto = f"Status ETL/KPI - {hora_atual}"
     enviar_email(assunto, corpo_email)
 
-#versão 3.5
+#versão 4.0
