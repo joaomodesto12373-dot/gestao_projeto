@@ -27,7 +27,7 @@ O fluxo de trabalho é o seguinte:
 | **Conectividade** | pyodbc, azure-identity | Conexão segura via Azure AD Token |
 | **Notificação** | smtplib | Envio de Alertas de Status |
 
-## ✨ Funcionalidades Principais
+## Funcionalidades Principais
 
 - **ETL Robusto:** Cálculo de desvio de custo e status de atraso (`etl/etl_projetos.py`).
 
@@ -58,7 +58,7 @@ O fluxo de trabalho é o seguinte:
 └── requirements.txt     # Dependências do projeto principal
 ```
 
-## ⚙️ Configuração e Instalação
+## Configuração e Instalação
 
 ### Pré-requisitos
 
@@ -95,7 +95,7 @@ O fluxo de trabalho é o seguinte:
 
 1. **Segurança de E-mail:** **Recomendação:** Armazene as credenciais de e-mail (linha 22) em um serviço seguro como o Azure Key Vault e acesse-as via variáveis de ambiente, em vez de deixá-las *hardcoded*.
 
-## 🚀 Execução
+## Execução
 
 O pipeline é projetado para ser executado automaticamente pela Azure Function.
 
